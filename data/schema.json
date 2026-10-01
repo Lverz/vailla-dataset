@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Vailla Abstract Reasoning Dataset",
+  "type": "object",
+  "required": [
+    "id",
+    "domain",
+    "category",
+    "difficulty",
+    "prompt",
+    "graph",
+    "reasoning_steps",
+    "answer",
+    "metadata"
+  ],
+  "properties": {
+    "id": { "type": "string" },
+    "domain": { "type": "string" },
+    "category": { "type": "string" },
+    "difficulty": { "type": "string", "enum": ["easy", "medium", "hard", "expert"] },
+    "prompt": { "type": "string" },
+    "graph": {
+      "type": "object",
+      "required": ["nodes", "edges"],
+      "properties": {
+        "nodes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "label", "type"],
+            "properties": {
+              "id": { "type": "string" },
+              "label": { "type": "string" },
+              "type": { "type": "string" }
+            }
+          }
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["from", "to", "relation"],
+            "properties": {
+              "from": { "type": "string" },
+              "to": { "type": "string" },
+              "relation": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "reasoning_steps": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "answer": { "type": "string" },
+    "metadata": {
+      "type": "object",
+      "required": ["theory_tags", "reasoning_type", "language"],
+      "properties": {
+        "theory_tags": { "type": "array", "items": { "type": "string" } },
+        "reasoning_type": { "type": "array", "items": { "type": "string" } },
+        "language": { "type": "string" }
+      }
+    }
+  }
+}
